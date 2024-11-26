@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #2E2E2E;
+}
+
+body {
+    background-color: #fff; /* Fundo branco */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff; /* Fundo branco no header */
+    box-shadow: none; /* Sem sombra */
+}
+
+.logo-area {
+    width: 150px;
+    height: 50px;
+}
+
+.logo-area img {
+   
+    object-fit: contain;
+}
+
+.header-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.header-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.main-content {
+    padding: 2rem;
+}
+
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Cor branca aplicada ao texto e ao "+" */
+.new-project-btn {
+    background-color: #376fd5;
+    color: white; /* Torna todo o texto do botão branco */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 40px;
+}
+
+.new-project-btn a, .new-project-btn::after {
+    color: white; /* Aplica a cor branca ao span e ao símbolo "+" */
+    text-decoration: none;
+}s
+
+.new-project-btn:hover {
+    background-color: #2a5cb8;
+
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Cor da barra onde está "Nome do projeto", "Curso", etc. */
+.projects-table th {
+    text-align: left;
+    padding: 1rem;
+    color: #2E2E2E;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e8ec;
+    background-color: #EEF1F6; /* Cor de fundo atualizada */
+}
+
+.projects-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e8ec;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: white; /* Cor de fundo branca na barra lateral */
+    padding: 1rem;
+    border-right: 2px solid #e5e8ec; /* Linha separadora */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin-top: 2rem;
+    flex-grow: 1;
+    width: 233px;
+}
+
+
+.sidebar-menu li.active {
+    background-color: #EEF1F6; 
+    color: #376FD5;
+    border-radius: 4px;
+    margin-top: 35px;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+}
+
+.sidebar-menu li.active::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 4px;
+    height: 80%;
+    background-color:  #376FD5;
+    border-radius: 4px;
+}
+
+.sidebar-menu li {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: #164aa3;
+}
+
+.sidebar-menu li:hover {
+    background-color: #e5e8ec;
+}
+
+.user-info {
+    border-top: 1px solid #e5e8ec;
+    padding-top: 1rem;
+}
+
+.user-info p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.user-info small {
+    color: #666;
+}
+
+.logout-option {
+    color: #FF5E52;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+.logout-option a {
+    text-decoration: none;
+    color: #FF5E52;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    
+}
+
+.logout-option:hover {
+    background-color: #e5e8ec;
+}
+
+.main-container {
+    margin-left: 250px;
+}
+
+h2 {
+    color: #2E2E2E;
+}
+
+.bottom-section {
+    margin-top: auto;
+}
+
+
+
+.bottom-section img {
+    width:22px;
+    
+}
+
+.active img {
+    width: 25px;
+}
+
+.logo-area img {
+    width: 200px;
+}
+
+
+
+
+
+/* Garante que o contêiner do projeto não oculte o picker */
+.projects-table {
+    overflow: visible; /* Permite que o picker saia dos limites */
+    position: relative; /* Cria um novo contexto de empilhamento */
+}
+
+.action-menu {
+    position: relative;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.picker-content {
+    position: absolute;
+    top: 100%; /* Posiciona o picker logo abaixo dos três pontinhos */
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    display: none; /* Oculta o picker inicialmente */
+    z-index: 1000; /* Garante que o picker fique acima de outros elementos */
+}
+
+.picker-content button {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.picker-content button:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+}
+
+

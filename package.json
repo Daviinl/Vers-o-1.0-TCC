@@ -1,0 +1,18 @@
+{
+  "name": "senai-projetos-main",
+  "version": "1.0.0",
+  "description": "Configuração do Projeto",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "firebase-admin": "^13.0.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}

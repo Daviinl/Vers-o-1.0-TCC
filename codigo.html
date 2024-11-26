@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAI - Verificar Código</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="reset-section">
+            <div class="reset-container">
+                <a href="login.html" class="voltar-link">
+                    < Voltar
+                </a>
+                <h1>Verifique o Código</h1>
+                <p class="description">Insira o código enviado para seu email.</p>
+                <form onsubmit="return validateCodeForm(event)">
+                    <div class="form-group">
+                        <label for="codigo">Código</label>
+                        <input type="text" id="codigo" placeholder="Ex: 1234" required>
+                    </div>
+                    <button type="submit">Continuar</button>
+                </form>
+            </div>
+        </div>
+        <div class="brand-section">
+            <img src="asdas.jpg" alt="Background">
+        </div>
+    </div>
+</body>
+</html>

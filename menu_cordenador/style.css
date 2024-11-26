@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #2E2E2E;
+}
+
+body {
+    background-color: #fff; /* Fundo branco */
+}
+
+
+
+
+/* Sidebar (barra lateral)*/
+
+
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: white; /* Cor de fundo branca na barra lateral */
+    padding: 1rem;
+    border-right: 2px solid #e5e8ec; /* Linha separadora */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin-top: 2rem;
+    flex-grow: 1;
+    width: 233px;
+}
+
+
+.sidebar-menu li.active {
+    background-color: #EEF1F6; 
+    color: #376FD5;
+    border-radius: 4px;
+    margin-top: 35px;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+}
+
+.sidebar-menu li.active::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 4px;
+    height: 80%;
+    background-color:  #376FD5;
+    border-radius: 4px;
+}
+
+.sidebar-menu li {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: #164aa3;
+}
+
+.sidebar-menu li:hover {
+    background-color: #e5e8ec;
+}
+
+.user-info {
+    border-top: 1px solid #e5e8ec;
+    padding-top: 1rem;
+}
+
+.user-info p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.user-info small {
+    color: #666;
+}
+
+.logout-option {
+    color: #FF5E52;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+.logout-option:hover {
+    background-color: #e5e8ec;
+}
+
+
+h2 {
+    color: #2E2E2E;
+}
+
+.bottom-section {
+    margin-top: auto;
+}
+
+
+.bottom-section img {
+    width:22px;
+    
+}
+
+.active img {
+    width: 25px;
+}
+
+.logo-area img {
+    width: 200px;
+    object-fit: contain;
+}
+
+
+.logo-area {
+    width: 150px;
+    height: 50px;
+}
+
+
+
+
+
+
+/*Main content*/
+
+
+
+.main-content {
+    margin-left: 240px; /* Espaço para a sidebar */
+    padding: 20px;
+    background-color: white;
+    min-height: 100vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 24px;
+    color: #2E2E2E;
+}
+
+.dropdown-header {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #2E2E2E;
+}
+
+.search-and-filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 455px;
+    height: 45px;
+    padding: 10px;
+    margin-left: 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+
+}
+
+.filter-btn {
+    background-color: #4169E1;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 15px;
+    color: white;
+}
+
+ .filter-btn i{
+    padding-left: 8px;
+    color: white;
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.projects-table th,
+.projects-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e8ec;
+    text-align: left;
+}
+
+.projects-table td img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.options-column {
+    position: relative;
+}
+
+.options-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #e5e8ec;
+    border-radius: 8px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu button {
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dropdown-menu button:hover {
+    background-color: #EEF1F6;
+}
+
+
+
+
+
+
+/* Novo estilo para a div clicável que envolve o nome do projeto */
+.project-link {
+    display: flex; /* Faz com que o ícone e o texto fiquem alinhados */
+    align-items: center; /* Centraliza verticalmente */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    padding: 10px; /* Espaçamento interno para aumentar a área clicável */
+    border-radius: 4px; /* Bordas arredondadas */
+    transition: background-color 0.2s; /* Transição suave para mudança de cor de fundo */
+}
+
+.project-link:hover {
+    background-color: #e5e8ec; /* Muda a cor de fundo ao passar o mouse */
+}  
+
+
+
+
+
+
+
+
+.modal {
+    display: flex; /* Usando flexbox para centralizar */
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Posiciona o modal de forma fixa */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 1000; /* Coloca o modal acima de outros elementos */
+}
+
+.modal-content {
+    background-color: white; /* Fundo branco para o conteúdo */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-align: center; /* Centraliza texto */
+}
+
+.close {
+    cursor: pointer; /* Cursor em forma de mão ao passar o mouse */
+    font-size: 24px; /* Tamanho da fonte */
+}
+
+.hidden {
+    display: none; /* Esconde elementos com essa classe */
+}

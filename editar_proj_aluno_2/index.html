@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <title>Informações do projeto</title>
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="logo-area">
+                <img src="img/Senai proj.jpg" alt="Logo" id="">
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active"> <img src="img/relogio.png" alt="">Projects</li>
+            </ul>
+            <div class="bottom-section">
+                <div class="logout-option"> <img src="img/logoff.png" alt="">
+                    Log off  
+                </div>
+                <div class="user-info">
+                    <p>Adriane Ribeiro</p>
+                    <small>Aluno</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="content">
+                <span class="back-button" onclick="location.href='../meu aluno 2/index.html';"> ↩ Voltar</span>
+                <h2>Informações do Projeto</h2>
+                <form class="project-form">
+                    <div class="input-group">
+                        <label for="nome-projeto">Nome do Projeto:</label>
+                        <input type="text" id="nome-projeto" placeholder="Nome do projeto">
+                    </div>
+                    <div class="input-desc">
+                        <label for="descricao-projeto">Descrição do Projeto:</label>
+                        <textarea id="descricao-projeto" placeholder="Descrição do Projeto..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="curso">Curso:</label>
+                        <select id="curso">
+                            <option>Desenvolvimento de sistemas</option>
+                            <option>Autocad</option>
+                            <option>Redes de computadores</option>
+                            <option>Administração</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="turma">Turma:</label>
+                        <select id="turma">
+                            <option>85367</option>
+                            <option>85366</option>
+                            <option>86468</option>
+                            <option>82356</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Componentes da equipe:</label>
+                        <input type="text" placeholder="Adriane Ribeiro">
+                        <input type="text" placeholder="Aluno 2">
+                        <input type="text" placeholder="Aluno 3">
+                        <input type="text" placeholder="Aluno 4">
+                        <input type="text" placeholder="Aluno 5">
+                    </div>
+                    <div class="input-group">
+                        <button type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="documents-section">
+                <h3>Documentos</h3>
+                <label>BM Canvas:</label>
+                <button id="bmCanvasButton" onclick="document.getElementById('uploadBM').click()">
+                    + Adicionar BM Canvas
+                </button>
+                <input type="file" id="uploadBM" style="display: none;" onchange="handleFileUpload(this, 'bmCanvasButton', 'BM Canvas')">
+    
+                <label>PM Canvas:</label>
+                <button id="pmCanvasButton" onclick="document.getElementById('uploadPM').click()">
+                    + Adicionar PM Canvas
+                </button>
+                <input type="file" id="uploadPM" style="display: none;" onchange="handleFileUpload(this, 'pmCanvasButton', 'PM Canvas')">
+    
+                <label>Pitch:</label>
+                <button id="pitchButton" onclick="document.getElementById('uploadPitch').click()">
+                    + Adicionar Pitch
+                </button>
+                <input type="file" id="uploadPitch" style="display: none;" onchange="handleFileUpload(this, 'pitchButton', 'Pitch')">
+    
+                <label>Outros:</label>
+                <button id="otherButton" onclick="document.getElementById('uploadOther').click()">
+                    + Adicionar Documento
+                </button>
+                <input type="file" id="uploadOther" style="display: none;" onchange="handleFileUpload(this, 'otherButton', 'Documento')">
+    
+                <div class="input-group">
+                    <label for="link-input">Links:</label>
+                    <div class="link-input-container">
+                        <input type="text" id="link-input" placeholder="Cole o link aqui">
+                        <i class="fa fa-pencil edit-icon" id="edit-icon" onclick="enableEdit()"></i>
+                    </div>
+                </div>
+            </div>
+    
+            
+            
+            
+        
+
+        <div class="modal" id="successModal">
+            <div class="modal-content">
+                <h3>Projeto cadastrado com sucesso!</h3>
+                <button class="close-btn">Ok</button>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+    </html>  

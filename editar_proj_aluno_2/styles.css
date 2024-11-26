@@ -1,0 +1,350 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #2E2E2E;
+}
+
+body {
+    background-color: #fff; /* Fundo branco */
+    font-family: 'poppins', sans-serif;
+}
+
+.logo-area {
+    width: 150px;
+    height: 50px;
+}
+
+.logo-area img {
+   
+    object-fit: contain;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: white; /* Cor de fundo branca na barra lateral */
+    padding: 1rem;
+    border-right: 2px solid #e5e8ec; /* Linha separadora */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin-top: 2rem;
+    flex-grow: 1;
+    width: 233px;
+}
+
+
+.sidebar-menu li.active {
+    background-color: #EEF1F6; 
+    color: #376FD5;
+    border-radius: 4px;
+    margin-top: 35px;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+}
+
+.sidebar-menu li.active::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 4px;
+    height: 80%;
+    background-color:  #376FD5;
+    border-radius: 4px;
+}
+
+.sidebar-menu li {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: #164aa3;
+}
+
+.sidebar-menu li:hover {
+    background-color: #e5e8ec;
+}
+
+.user-info {
+    border-top: 1px solid #e5e8ec;
+    padding-top: 1rem;
+}
+
+.user-info p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.user-info small {
+    color: #666;
+}
+
+.logout-option {
+    color: #FF5E52;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+.logout-option:hover {
+    background-color: #e5e8ec;
+}
+
+.main-container {
+    margin-left: 250px;
+}
+
+h2 {
+    color: #2E2E2E;
+}
+
+.bottom-section {
+    margin-top: auto;
+}
+
+
+
+.bottom-section img {
+    width:22px;
+    
+}
+
+.active img {
+    width: 25px;
+}
+
+.logo-area img {
+    width: 200px;
+}
+
+
+
+/* css do contéudo principal*/
+
+
+.main-container {
+    margin-left: 250px;
+    display: flex;
+    padding: 20px;
+    
+}
+.content {
+    flex: 1;
+    padding-left: 25px;
+    background-color: #F4F6F9;
+    overflow-y: auto;
+    max-width: 600px;
+}
+
+.project-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-desc textarea {
+    width: 400px;
+    height: 150px;
+    padding: 5px;
+    resize: none;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 400px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.input-group textarea {
+    resize: none;
+}
+
+.input-group button {
+    background-color: #376FD5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.documents-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-left: -90px;
+    width: 250px;
+    margin-top: 45px;
+}
+
+.documents-section label{
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.documents-section h3 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.documents-section button {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-bottom: 1px solid;
+    border-color: #D3D3D3;
+    background-color: white;
+    color: #3498DB;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+    box-shadow: none;
+}
+
+.input-group label {
+    font-weight: bold;
+}
+
+.input-desc label {
+    font-weight: bold;
+}
+
+
+
+.back-button {
+    display: inline-block; /* Faz o span se comportar como um bloco */
+    margin-bottom: 20px; /* Espaço abaixo do botão */
+    padding: 10px 15px; /* Espaçamento interno */
+    background-color: white; /* Cor de fundo */
+    color: #3498DB; /* Cor do texto */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para uma mão ao passar o mouse */
+    text-decoration: none; /* Remove o sublinhado do texto */
+    font-weight: bold; /* Texto em negrito */
+    
+}
+
+
+
+
+
+.modal {
+    display: none; /* Esconde o modal por padrão */
+    position: fixed; /* Fica fixo na tela */
+    z-index: 1; /* Fica acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Habilita rolagem se necessário */
+    background-color: rgba(0,0,0,0.4); /* Fundo com opacidade */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Margem de 15% do topo e centralizado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 17%; /* Largura do modal */
+    height: 19%;
+    border-radius: 8px;
+}
+
+.modal-content h3 {
+    color: #376FD5;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Espaço entre o título e o botão */
+    text-align: center;
+}
+
+.close-btn {
+    width: 100%; 
+    height: 40px;
+    border-radius: 5px;
+    background-color: #376FD5;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-align: center; /* Centraliza o texto dentro do botão */
+    display: block; /* Faz o botão ocupar toda a largura */
+}   
+
+
+
+
+/*link*/
+
+.link-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#link-input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 30px; /* Espaço para o ícone */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.edit-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
