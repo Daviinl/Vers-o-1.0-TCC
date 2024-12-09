@@ -5,57 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Dashboard do Coordenador</title>
+    <!-- Adicione a biblioteca do Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 </head>
 <body>
-     <div class="sidebar">
+    <div class="sidebar">
         <div class="logo-area">
             <img src="img/Senai proj.jpg" alt="Logo">
         </div>
         <ul class="sidebar-menu">
-            <li class="active"><img src="img/relogio.png" alt="">Projects</li> <!-- Cor #EEF1F6 apenas aqui -->
+            <li class="active"><img src="img/relogio.png" alt="">Projetos</li>
         </ul>
         <div class="bottom-section">
-            <div class="logout-option"><img src="img/logoff.png" alt="">
-                Log off  
-            </div>
+            <div class="logout-option"><img src="img/logoff.png" alt="">Log off</div>
             <div class="user-info">
                 <p>Adriane Ribeiro</p>
-                <small>Aluno</small>
+                <small>Coordenador</small>
             </div>
         </div>
     </div>
-    <!-- fim da sidebar -->
 
     <div class="main-content">
         <div class="header">
-            <h2>Todos os projetos</h2>
+            <h2>Todos os Projetos</h2>
             <button class="dropdown-header">▼</button>
         </div>
 
         <div class="search-and-filters">
             <input type="text" placeholder="Pesquisar...">
-
             <div class="filters">
-                <button class="filter-btn">
-                    Des. Sistemas <i class="fa-solid fa-list-check"></i>
-                </button>
-                <button class="filter-btn">
-                    85367 <i class="fa-solid fa-list-check"></i>
-                </button>
-                <button class="filter-btn">
-                    Turno <i class="fa-solid fa-list-check"></i>
-                </button>
-                <button class="filter-btn">
-                    Orientador <i class="fa-solid fa-list-check"></i>
-                </button>
+                <button class="filter-btn">Des. Sistemas <i class="fa-solid fa-list-check"></i></button>
+                <button class="filter-btn">85367 <i class="fa-solid fa-list-check"></i></button>
+                <button class="filter-btn">Turno <i class="fa-solid fa-list-check"></i></button>
+                <button class="filter-btn">Orientador <i class="fa-solid fa-list-check"></i></button>
             </div>
         </div>
 
         <table class="projects-table">
             <thead>
                 <tr>
-                    <th>Nome do projeto</th>
+                    <th>Nome do Projeto</th>
                     <th>Curso</th>
                     <th>Turma</th>
                     <th>Turno</th>
@@ -63,45 +54,8 @@
                     <th>Opções</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <!-- Atualizado: Adicionada uma div clicável envolvendo ícone e nome do projeto -->
-                    <td>
-                        <div class="project-link" onclick="handleProjectClick('Tarefa Fácil')">
-                            <i class="fa-regular fa-folder-open"></i> Tarefa Fácil
-                        </div>
-                    </td>
-                    <td>Des. Sistemas</td>
-                    <td>85367</td>
-                    <td>Matutino</td>
-                    <td>Carlos Anderson</td>
-                    <td class="options-column">
-                        <button class="options-btn">...</button>
-                        <div class="dropdown-menu hidden">
-                            <button class="edit-btn">Editar</button>
-                            <button class="delete-btn">Excluir</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <!-- Atualizado: Adicionada uma div clicável envolvendo ícone e nome do projeto -->
-                    <td>
-                        <div class="project-link" onclick="handleProjectClick('Saúde Já')">
-                            <i class="fa-regular fa-folder-open"></i> Saúde Já
-                        </div>
-                    </td>
-                    <td>Des. Sistemas</td>
-                    <td>85367</td>
-                    <td>Matutino</td>
-                    <td>Carlos Anderson</td>
-                    <td class="options-column">
-                        <button class="options-btn">...</button>
-                        <div class="dropdown-menu hidden">
-                            <button class="edit-btn">Editar</button>
-                            <button class="delete-btn">Excluir</button>
-                        </div>
-                    </td>
-                </tr>
+            <tbody id="projects-list">
+                <!-- Projetos serão carregados aqui via JavaScript -->
             </tbody>
         </table>
     </div>

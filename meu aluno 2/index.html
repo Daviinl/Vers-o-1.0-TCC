@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>Menu Aluno</title>
     <style>
-        /* Estilo para o modal */
+        /* Estilo geral do modal */
         .modal {
             display: none;
             position: fixed;
@@ -16,109 +16,155 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com transparência */
+            font-family: 'Arial', sans-serif;
         }
-
+    
+        /* Conteúdo do modal */
         .modal-content {
-            background-color: #ffffff;
+            background: linear-gradient(145deg, #ffffff, #f3f3f3);
             margin: 5% auto;
-            padding: 20px;
-            border: none;
-            border-radius: 12px;
+            padding: 30px 25px;
+            border-radius: 15px;
             width: 70%;
-            max-width: 1000px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
         }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
+    
+        /* Cabeçalho do modal */
         .modal-header h2 {
             font-size: 24px;
-            margin: 0;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin: 0 0 20px;
         }
-
+    
+        /* Corpo do modal */
         .modal-body {
             display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-bottom: 20px;
+            padding: 15px 0;
         }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
+    
+        /* Estilo dos campos de entrada */
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea { /* Incluindo textarea aqui */
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
+    
+        .form-group textarea {
+            resize: vertical;
+            height: 150px; /* Ajustando a altura do campo de texto */
+        }
+    
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus { /* Foco no textarea também */
+            border-color: #4CAF50;
+            box-shadow: 0px 0px 10px rgba(76, 175, 80, 0.3);
+        }
+    
+        /* Rótulos */
         .form-group label {
             font-size: 14px;
+            font-weight: bold;
+            color: #555;
             margin-bottom: 5px;
         }
-
-        .form-group input, 
-        .form-group textarea, 
-        .form-group select {
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            outline: none;
-        }
-
-        .form-group input:focus, 
-        .form-group textarea:focus, 
-        .form-group select:focus {
-            border-color: #007BFF;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .close-btn, .submit-btn {
-            padding: 10px 20px;
-            font-size: 14px;
+    
+        /* Botões */
+        .close-btn, .next-btn, .submit-btn {
+            padding: 12px 20px;
+            font-size: 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
         }
-
+    
+        /* Botão de cancelar */
         .close-btn {
             background-color: #f44336;
             color: white;
+            font-weight: bold;
         }
-
+    
         .close-btn:hover {
             background-color: #d32f2f;
         }
-
+    
+        /* Botão de próximo */
+        .next-btn {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+        }
+    
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    
+        /* Botão de enviar */
         .submit-btn {
             background-color: #4CAF50;
             color: white;
+            font-weight: bold;
         }
-
+    
         .submit-btn:hover {
             background-color: #388E3C;
         }
-
-        /* Ajuste para garantir que a segunda coluna (para os uploads) não ultrapasse o limite */
-        .form-group input[type="file"] {
-            width: 100%;
+    
+        /* Transições suaves */
+        .modal-content {
+            transform: translateY(-50px);
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
         }
-
-        /* Definindo colunas específicas */
-        .modal-body .left-column {
-            grid-column: 1;
+    
+        @keyframes fadeIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-
-        .modal-body .right-column {
-            grid-column: 2;
+    
+        /* Estilo para o passo atual */
+        .form-step {
+            display: none;
+        }
+    
+        .form-step.active {
+            display: block;
+        }
+    
+        /* Estilo do Botão "Anterior" */
+        .prev-btn {
+            background-color: #FFC107;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+    
+        .prev-btn:hover {
+            background-color: #FFA000;
         }
     </style>
 </head>
@@ -148,7 +194,7 @@
         <div class="main-content">
             <div class="projects-header">
                 <h2>Meus Projetos</h2>
-                <button id="newProjectButton" class="new-project-btn">New Project +</button>
+                <button id="newProjectButton" class="new-project-btn">Novo Projeto +</button>
             </div>
 
             <table class="projects-table">
@@ -177,32 +223,48 @@
             </div>
             <form id="newProjectForm" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <!-- Primeira coluna (esquerda) com campos de texto -->
-                    <div class="left-column">
+                    <!-- Primeira seção com os campos de texto -->
+                    <div id="step1" class="form-step active">
                         <div class="form-group">
                             <label for="name">Nome do Projeto:</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" placeholder="Digite o nome do projeto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descrição:</label>
+                            <textarea id="description" name="description" placeholder="Descreva brevemente o projeto" rows="4" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="course">Curso:</label>
-                            <input type="text" id="course" name="course" required>
+                            <input type="text" id="course" name="course" placeholder="Digite o curso" required>
                         </div>
                         <div class="form-group">
                             <label for="classGroup">Turma:</label>
-                            <input type="text" id="classGroup" name="classGroup" required>
+                            <input type="text" id="classGroup" name="classGroup" placeholder="Digite a turma" required>
                         </div>
                         <div class="form-group">
-                            <label for="shift">Turno:</label>
-                            <input type="text" id="shift" name="shift" required>
+                            <label for="component1">Componente 1:</label>
+                            <input type="text" id="component1" name="component1" value="Adriane Ribeiro" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="advisor">Orientador:</label>
-                            <input type="text" id="advisor" name="advisor" required>
+                            <label for="component2">Componente 2:</label>
+                            <input type="text" id="component2" name="component2" placeholder="Digite o nome do componente 2">
+                        </div>
+                        <div class="form-group">
+                            <label for="component3">Componente 3:</label>
+                            <input type="text" id="component3" name="component3" placeholder="Digite o nome do componente 3">
+                        </div>
+                        <div class="form-group">
+                            <label for="component4">Componente 4:</label>
+                            <input type="text" id="component4" name="component4" placeholder="Digite o nome do componente 4">
+                        </div>
+                        <div class="form-group">
+                            <label for="component5">Componente 5:</label>
+                            <input type="text" id="component5" name="component5" placeholder="Digite o nome do componente 5">
                         </div>
                     </div>
-
-                    <!-- Segunda coluna (direita) para os uploads de arquivos -->
-                    <div class="right-column">
+            
+                    <!-- Segunda seção com os campos de upload -->
+                    <div id="step2" class="form-step">
                         <div class="form-group">
                             <label for="videoPitch">Vídeo Pitch:</label>
                             <input type="file" id="videoPitch" name="videoPitch" accept="video/*">
@@ -221,12 +283,19 @@
                         </div>
                     </div>
                 </div>
+            
                 <div class="modal-footer">
                     <button type="button" class="close-btn" id="closeModal">Cancelar</button>
-                    <button type="submit" class="submit-btn">Enviar</button>
+                    <button type="button" class="prev-btn" id="prevStep" style="display: none;">Anterior</button>
+                    <button type="button" class="next-btn" id="nextStep">Próximo</button>
+                    <button type="submit" class="submit-btn" id="submitForm" style="display: none;">Enviar</button>
                 </div>
             </form>
         </div>
+
+        <!-- Mensagem de sucesso -->
+<div id="successMessage" style="display:none; color: green; font-weight: bold; text-align: center; padding: 10px 0;"></div>
+
     </div>
 
     <script>
@@ -244,41 +313,91 @@
             if (event.target === modal) modal.style.display = 'none'; 
         };
 
-        // Enviar formulário de criação de projeto
-        document.getElementById('newProjectForm').onsubmit = async (event) => {
-            event.preventDefault(); 
+        // Função para listar projetos
+        async function listProjects() {
+            // Simulação de projetos em um array. Você pode substituir isso com dados reais de um banco de dados.
+            const projects = [
+                {
+                    id: 1,
+                    name: 'Projeto 1',
+                    course: 'Tecnologia da Informação',
+                    classGroup: '2024-01',
+                    shift: 'Matutino',
+                    advisor: 'Prof. João Silva',
+                },
+                {
+                    id: 2,
+                    name: 'Projeto 2',
+                    course: 'Engenharia de Software',
+                    classGroup: '2024-02',
+                    shift: 'Vespertino',
+                    advisor: 'Prof. Maria Oliveira',
+                },
+                // Adicione mais projetos conforme necessário
+            ];
+            
+            // Limpar lista atual
+            projectsList.innerHTML = '';
 
-            const formData = new FormData();
-            formData.append('name', document.getElementById('name').value);
-            formData.append('course', document.getElementById('course').value);
-            formData.append('classGroup', document.getElementById('classGroup').value);
-            formData.append('shift', document.getElementById('shift').value);
-            formData.append('advisor', document.getElementById('advisor').value);
-            formData.append('videoPitch', document.getElementById('videoPitch').files[0]);
-            formData.append('documentTCC', document.getElementById('documentTCC').files[0]);
-            formData.append('prototype', document.getElementById('prototype').files[0]);
-            formData.append('pmCanvas', document.getElementById('pmCanvas').files[0]);
+            // Preencher a tabela com os projetos
+            projects.forEach(project => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${project.name}</td>
+                    <td>${project.course}</td>
+                    <td>${project.classGroup}</td>
+                    <td>${project.shift}</td>
+                    <td>${project.advisor}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editProject(${project.id})">Editar</button>
+                        <button class="delete-btn" onclick="deleteProject(${project.id})">Excluir</button>
+                    </td>
+                `;
+                
+                projectsList.appendChild(row);
+            });
+        }
 
-            try {
-                const response = await fetch('http://localhost:3000/projects', {
-                    method: 'POST',
-                    body: formData,
-                });
+        // Função para avançar entre os passos
+        const nextStepBtn = document.getElementById('nextStep');
+        const prevStepBtn = document.getElementById('prevStep');
+        const submitFormBtn = document.getElementById('submitForm');
+        let currentStep = 1;
 
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert('Projeto criado com sucesso!');
-                    modal.style.display = 'none';
-                    // Atualizar a lista de projetos (se necessário)
-                } else {
-                    alert('Erro ao criar o projeto: ' + result.message);
-                }
-            } catch (error) {
-                console.error('Erro:', error);
-                alert('Erro ao criar o projeto');
+        nextStepBtn.onclick = () => {
+            if (currentStep === 1) {
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                currentStep++;
+                prevStepBtn.style.display = 'inline-block';
+                nextStepBtn.style.display = 'none';
+                submitFormBtn.style.display = 'inline-block';
             }
         };
+
+        prevStepBtn.onclick = () => {
+            if (currentStep === 2) {
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step1').classList.add('active');
+                currentStep--;
+                prevStepBtn.style.display = 'none';
+                nextStepBtn.style.display = 'inline-block';
+                submitFormBtn.style.display = 'none';
+            }
+        };
+
+        // Enviar formulário
+        document.getElementById('newProjectForm').onsubmit = (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            // Aqui você pode adicionar código para enviar os dados para o servidor
+            console.log(...formData);
+            modal.style.display = 'none'; // Fecha o modal após envio
+        };
+
+        // Chama a função de listagem de projetos ao carregar a página
+        document.addEventListener('DOMContentLoaded', listProjects);
     </script>
 </body>
 </html>

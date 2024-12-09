@@ -5,7 +5,7 @@ const path = require('path');
 const cors = require('cors'); // Importa o pacote CORS
 
 // Corrigindo o caminho para o arquivo de credenciais
-const serviceAccount = require('./firebase-service-account.json.json');
+const serviceAccount = require('./firebase-service-account.json'); // Remova a extensão extra
 
 // Inicialize o Firebase Admin
 admin.initializeApp({
