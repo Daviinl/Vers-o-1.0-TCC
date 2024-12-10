@@ -9,11 +9,49 @@
     <!-- Adicione a biblioteca do Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <style>
+        .search-and-filters {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+        }
+
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        button {
+            width: 50px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            background-color: #287ED4;
+            color: #fff;
+        }
+
+        select:hover {
+            border-color: #287ED4; /* Cor de destaque ao passar o mouse */
+        }
+    </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo-area">
-            <img src="img/Senai proj.jpg" alt="Logo">
+            <img src="img/Logo home.png" alt="Logo">
         </div>
         <ul class="sidebar-menu">
             <li class="active"><img src="img/relogio.png" alt="">Projetos</li>
@@ -30,16 +68,41 @@
     <div class="main-content">
         <div class="header">
             <h2>Todos os Projetos</h2>
-            <button class="dropdown-header">▼</button>
+            <button class="dropdown-header"></button>
         </div>
 
         <div class="search-and-filters">
             <input type="text" placeholder="Pesquisar...">
             <div class="filters">
-                <button class="filter-btn">Des. Sistemas <i class="fa-solid fa-list-check"></i></button>
-                <button class="filter-btn">85367 <i class="fa-solid fa-list-check"></i></button>
-                <button class="filter-btn">Turno <i class="fa-solid fa-list-check"></i></button>
-                <button class="filter-btn">Orientador <i class="fa-solid fa-list-check"></i></button>
+                <select id="course-filter">
+                    <option value="">Selecionar Curso</option>
+                    <option value="Des. Sistemas">Des. Sistemas</option>
+                    <option value="Design">Design</option>
+                    <option value="Administração">Administração</option>
+                    <option value="Engenharia">Engenharia</option>
+                </select>
+
+                <select id="class-filter">
+                    <option value="">Selecionar Turma</option>
+                    <option value="85367">85367</option>
+                    <option value="85366">85366</option>
+                    <option value="85365">85365</option>
+                    <option value="85365">79366</option>
+
+                </select>
+
+                <select id="shift-filter">
+                    <option value="">Selecionar Turno</option>
+                    <option value="Matutino">Matutino</option>
+                    <option value="Vespertino">Vespertino</option>
+                    <option value="Noturno">Noturno</option>
+                </select>
+
+                <select id="advisor-filter">
+                    <option value="">Selecionar Orientador</option>
+                    <option value="Carlos Anderson">Carlos Anderson</option>
+                    <option value="Clarisvete">Clarisvete</option>
+                </select>
             </div>
         </div>
 
@@ -55,11 +118,106 @@
                 </tr>
             </thead>
             <tbody id="projects-list">
-                <!-- Projetos serão carregados aqui via JavaScript -->
+                <!-- Projetos de exemplo -->
+                <tr>
+                    <td>Projeto 1</td>
+                    <td>Des. Sistemas</td>
+                    <td>85367</td>
+                    <td>Matutino</td>
+                    <td>Carlos Anderson</td>
+                    <td><button>Ver</button></td>
+                </tr>
+                <tr>
+                    <td>Projeto adm1</td>
+                    <td>Administração</td>
+                    <td>79366</td>
+                    <td>Noturno</td>
+                    <td>Clarisvete</td>
+                    <td><button>Ver</button></td>
+                </tr>
+
+                <tr>
+                    <td>Projeto adm2</td>
+                    <td>Administração</td>
+                    <td>79366</td>
+                    <td>Noturno</td>
+                    <td>Clarisvete</td>
+                    <td><button>Ver</button></td>
+                </tr>
+
+                <tr>
+                    <td>Projeto 3</td>
+                    <td>Des. Sistemas</td>
+                    <td>85367</td>
+                    <td>Matutino</td>
+                    <td>Clarisvete</td>
+                    <td><button onclick="window.location.href= window.location.href='/editar_proj_aluno_2/index.html?id=3'">Ver</button></td>
+                </tr>
+                <tr>
+                    <td>Projeto 4</td>
+                    <td>Des. Sistemas</td>
+                    <td>85367</td>
+                    <td>Matutino</td>
+                    <td>Carlos Anderson</td>
+                    <td><button>Ver</button></td>
+                </tr>
+                <tr>
+                    <td>Projeto 5</td>
+                    <td>Des. Sistemas</td>
+                    <td>85366</td>
+                    <td>Vespertino</td>
+                    <td>Clarisvete</td>
+                    <td><button>Ver</button></td>
+                </tr>
             </tbody>
         </table>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Adicione um event listener para os filtros, se necessário
+        document.addEventListener('DOMContentLoaded', function() {
+    const courseFilter = document.getElementById('course-filter');
+    const classFilter = document.getElementById('class-filter');
+    const shiftFilter = document.getElementById('shift-filter');
+    const advisorFilter = document.getElementById('advisor-filter');
+    const searchInput = document.querySelector('input[type="text"]');
+
+    [courseFilter, classFilter, shiftFilter, advisorFilter, searchInput].forEach(filter => {
+        filter.addEventListener('input', function() {
+            applyFilters();
+        });
+    });
+});
+
+function applyFilters() {
+    const courseFilter = document.getElementById('course-filter').value;
+    const classFilter = document.getElementById('class-filter').value;
+    const shiftFilter = document.getElementById('shift-filter').value;
+    const advisorFilter = document.getElementById('advisor-filter').value;
+    const searchInput = document.querySelector('input[type="text"]').value.toLowerCase();
+    const rows = document.querySelectorAll('#projects-list tr');
+
+    rows.forEach(row => {
+        const projectName = row.cells[0].textContent.toLowerCase();
+        const course = row.cells[1].textContent;
+        const classNum = row.cells[2].textContent;
+        const shift = row.cells[3].textContent;
+        const advisor = row.cells[4].textContent;
+
+        // Verifica se todos os filtros e a busca pelo nome estão atendidos
+        if ((courseFilter === '' || course === courseFilter) &&
+            (classFilter === '' || classNum === classFilter) &&
+            (shiftFilter === '' || shift === shiftFilter) &&
+            (advisorFilter === '' || advisor === advisorFilter) &&
+            (searchInput === '' || projectName.includes(searchInput))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+
+    </script>
 </body>
 </html>
