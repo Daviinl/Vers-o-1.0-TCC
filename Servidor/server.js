@@ -2,42 +2,45 @@ const express = require('express');
 const multer = require('multer');
 const admin = require('firebase-admin');
 const path = require('path');
-const cors = require('cors'); // Importa o pacote CORS
+const cors = require('cors');
 
-// Corrigindo o caminho para o arquivo de credenciais
-const serviceAccount = require('./firebase-service-account.json'); // Remova a extensão extra
+// Configuração do Firebase Admin
+const serviceAccount = require('./firebase-service-account.json');
 
-// Inicialize o Firebase Admin
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://senai-repositorio.firebaseio.com' // URL correta
+    databaseURL: 'https://senai-repositorio.firebaseio.com'
 });
 
 const db = admin.firestore();
 
-// Configuração do storage do multer
+// Configuração do multer para upload de arquivos
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        // Define a pasta onde os arquivos serão salvos
-        cb(null, './uploads');
+        const uploadPath = './uploads';
+        cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-        // Gera um nome único para cada arquivo
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, `${Date.now()}-${file.originalname}`);
     }
 });
 
-// Criação do middleware do multer
 const upload = multer({ storage });
 
 // Inicializa o servidor Express
 const app = express();
-
-// Configura o middleware para habilitar CORS
 app.use(cors());
-
-// Configura o middleware para lidar com JSON
 app.use(express.json());
+
+// Testa a conexão com o Firestore
+db.collection('projects')
+    .get()
+    .then(snapshot => {
+        console.log(`Conexão com Firestore estabelecida. Projetos encontrados: ${snapshot.size}`);
+    })
+    .catch(error => {
+        console.error('Erro ao conectar ao Firestore:', error);
+    });
 
 // Rota para criar novo projeto
 app.post(
@@ -50,6 +53,9 @@ app.post(
     ]),
     async (req, res) => {
         try {
+            console.log('Body recebido:', req.body); // Log dos dados enviados
+            console.log('Files recebidos:', req.files); // Log dos arquivos enviados
+
             const projectData = {
                 name: req.body.name,
                 course: req.body.course,
@@ -63,17 +69,18 @@ app.post(
                 createdAt: new Date()
             };
 
-            // Salvar o projeto no Firebase Firestore
             const docRef = await db.collection('projects').add(projectData);
-            res.status(201).json({ id: docRef.id, message: 'Projeto criado com sucesso' });
+            console.log(`Projeto salvo com ID: ${docRef.id}`);
+
+            res.status(201).json({ id: docRef.id, message: 'Projeto criado com sucesso!' });
         } catch (error) {
-            console.error(error);
+            console.error('Erro ao criar o projeto:', error);
             res.status(500).json({ message: 'Erro ao criar o projeto' });
         }
     }
 );
 
-// Iniciar o servidor
+// Inicia o servidor
 const port = 3000;
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

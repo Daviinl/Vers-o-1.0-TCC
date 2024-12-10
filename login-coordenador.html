@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENAI - Login</title>
+    <title>SENAI - Login Coordenador</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script-login.js" defer></script>
+    <script src="script-coordenador.js" defer></script>
 </head>
 <body>
     <div class="container">
         <div class="login-section">
             <div class="login-container">
-                <h1>Login</h1>
-                <form onsubmit="return validateUserLoginForm(event)">
+                <h1>Login - Coordenador</h1>
+                <form onsubmit="return validateCoordinatorLoginForm(event)">
                     <div class="form-group">
                         <label for="email">Email<span>*</span></label>
                         <input type="email" id="email" placeholder="Digite seu email" required>
@@ -29,13 +29,10 @@
                         <a href="esqueci-senha-email.html" class="forgot-link">Esqueceu a senha?</a>
                     </div>
                     <button type="submit">Entrar</button>
-                    <div class="signup-link">
-                        Não tem uma conta? <a href="cadastro.html">Criar conta</a>
-                    </div>
-                    <div class="coordinator-link">
-                        <a href="login-coordenador.html" class="coordinator-login">Sou Coordenador</a>
-                    </div>
                 </form>
+                <div class="return-link">
+                    <a href="login.html" class="return-button">Voltar ao login de Aluno</a>
+                </div>
             </div>
         </div>
         <div class="brand-section">

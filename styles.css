@@ -1,4 +1,74 @@
-/* Estilos Comuns para Todas as Páginas */
+/* Estilo para o link de retorno */
+.return-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.return-button {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #FF6347; /* Cor mais vibrante */
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.return-button:hover {
+    background-color: #E5533A; /* Cor de hover */
+    transform: scale(1.05); /* Efeito de aumentar */
+}
+
+.return-button:active {
+    background-color: #D44F30; /* Cor ao clicar */
+    transform: scale(1); /* Retorna ao tamanho normal ao clicar */
+}
+
+
+
+
+/* Estilos para o botão de coordenador */
+.coordinator-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.coordinator-link p {
+    margin-right: 10px;
+    color: #2E2E2E;
+    font-size: 1rem;
+}
+
+.coordinator-login {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.coordinator-login:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+}
+
+.coordinator-login:active {
+    background-color: #003d80;
+    transform: scale(1); /* Retorna ao tamanho normal ao clicar */
+}
+
+/* Estilos gerais */
 * {
     margin: 0;
     padding: 0;

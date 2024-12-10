@@ -1,25 +1,49 @@
 // === DOM ===
-const projectsList = document.getElementById('projects-list'); // Tabela de projetos
+const projectsList = document.getElementById('projects-list'); // Lista de projetos
 const newProjectForm = document.getElementById('newProjectForm'); // Formulário de novo projeto
-const modal = document.getElementById('newProjectModal'); // Modal de novo projeto
-const successMessage = document.getElementById('successMessage'); // Elemento de mensagem de sucesso
+const modal = document.getElementById('newProjectModal'); // Modal
+const successMessage = document.getElementById('successMessage'); // Mensagem de sucesso
+let currentStep = 1; // Controle do passo no modal
 
-// === Funções ===
+// Botões do modal
+document.getElementById('newProjectButton').onclick = () => { modal.style.display = 'block'; };
+document.getElementById('closeModal').onclick = () => { modal.style.display = 'none'; };
+window.onclick = (event) => { if (event.target === modal) modal.style.display = 'none'; };
 
-// Função para carregar os projetos do Firebase
+// Navegação do modal
+document.getElementById('nextStep').onclick = () => {
+    if (currentStep === 1) {
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+        currentStep++;
+        document.getElementById('prevStep').style.display = 'inline-block';
+        document.getElementById('nextStep').style.display = 'none';
+        document.getElementById('submitForm').style.display = 'inline-block';
+    }
+};
+
+document.getElementById('prevStep').onclick = () => {
+    if (currentStep === 2) {
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step1').classList.add('active');
+        currentStep--;
+        document.getElementById('prevStep').style.display = 'none';
+        document.getElementById('nextStep').style.display = 'inline-block';
+        document.getElementById('submitForm').style.display = 'none';
+    }
+};
+
+// Função para carregar projetos
 async function loadProjects() {
-    projectsList.innerHTML = ''; // Limpa a tabela antes de adicionar os projetos
-
+    projectsList.innerHTML = '<tr><td colspan="6">Carregando...</td></tr>';
     try {
-        // Referência para a coleção 'projects' no Firebase
         const projectsRef = firebase.database().ref('projects');
-
-        // Obtenção dos projetos do Firebase
         projectsRef.once('value', (snapshot) => {
             const projects = snapshot.val();
+            projectsList.innerHTML = '';
             if (projects) {
-                Object.keys(projects).forEach(projectId => {
-                    const project = projects[projectId];
+                Object.keys(projects).forEach(id => {
+                    const project = projects[id];
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${project.name}</td>
@@ -28,27 +52,24 @@ async function loadProjects() {
                         <td>${project.shift}</td>
                         <td>${project.advisor}</td>
                         <td>
-                            <div class="action-menu">
-                                <button class="action-btn" onclick="togglePicker(this)">⋮</button>
-                                <div class="picker-content" style="display: none;">
-                                    <button class="edit-btn" onclick="editProject('${projectId}')">Editar</button>
-                                    <button class="delete-btn" onclick="deleteProject('${projectId}')">Excluir</button>
-                                </div>
-                            </div>
-                        </td>
-                    `;
+                            <button onclick="editProject('${id}')">Editar</button>
+                            <button onclick="deleteProject('${id}')">Excluir</button>
+                        </td>`;
                     projectsList.appendChild(row);
                 });
             } else {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="6">Nenhum projeto encontrado.</td>`;
-                projectsList.appendChild(row);
+                projectsList.innerHTML = '<tr><td colspan="6">Nenhum projeto encontrado.</td></tr>';
             }
         });
     } catch (error) {
-        console.error('Erro ao carregar projetos:', error);
         alert('Erro ao carregar os projetos.');
+        console.error(error);
     }
+}
+
+// Função para editar um projeto (em desenvolvimento)
+function editProject(projectId) {
+    alert(`Funcionalidade de edição em desenvolvimento para o projeto ID: ${projectId}`);
 }
 
 // Função para excluir um projeto
@@ -58,67 +79,30 @@ async function deleteProject(projectId) {
             const projectRef = firebase.database().ref(`projects/${projectId}`);
             await projectRef.remove();
             alert('Projeto excluído com sucesso!');
-            loadProjects(); // Recarrega a lista de projetos
+            loadProjects();
         } catch (error) {
-            console.error('Erro ao excluir o projeto:', error);
             alert('Erro ao excluir o projeto.');
+            console.error(error);
         }
     }
 }
 
-// Função para exibir ou esconder o menu de ações
-function togglePicker(button) {
-    const pickerContent = button.nextElementSibling;
-    pickerContent.style.display = pickerContent.style.display === 'none' ? 'block' : 'none';
-}
-
-// Função para editar um projeto
-function editProject(projectId) {
-    // Chamar o backend para buscar os dados do projeto, caso necessário
-    // Para simplificação, o projeto já poderia estar carregado em cache ou localmente
-    alert(`Funcionalidade de edição em desenvolvimento para o projeto ID: ${projectId}`);
-}
-
-// Função para salvar um novo projeto
-newProjectForm.onsubmit = async (event) => {
-    event.preventDefault(); // Impede o envio padrão do formulário
-
-    // Coletando os dados do formulário
+// Submissão do formulário
+newProjectForm.onsubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData(newProjectForm);
-    
     try {
-        // Adicionando o projeto ao Firebase
-        const newProject = {
-            name: formData.get('name'),
-            course: formData.get('course'),
-            classGroup: formData.get('classGroup'),
-            shift: formData.get('shift'),
-            advisor: formData.get('advisor'),
-            videoPitch: formData.get('videoPitch') ? formData.get('videoPitch') : null,
-            documentTCC: formData.get('documentTCC') ? formData.get('documentTCC') : null,
-            prototype: formData.get('prototype') ? formData.get('prototype') : null,
-            pmCanvas: formData.get('pmCanvas') ? formData.get('pmCanvas') : null,
-        };
-
-        // Referência para a coleção de projetos no Firebase
         const projectsRef = firebase.database().ref('projects');
-        const newProjectRef = projectsRef.push(); // Cria uma nova referência
-        await newProjectRef.set(newProject); // Salva o projeto no Firebase
-
-        // Exibindo a mensagem de sucesso
-        successMessage.innerHTML = 'Projeto criado com sucesso!';
-        successMessage.style.display = 'block'; // Exibe a mensagem
-        setTimeout(() => {
-            successMessage.style.display = 'none'; // Esconde a mensagem após 3 segundos
-        }, 3000);
-
-        // Fecha o modal
+        await projectsRef.push(Object.fromEntries(formData.entries()));
+        successMessage.style.display = 'block';
+        setTimeout(() => { successMessage.style.display = 'none'; }, 3000);
         modal.style.display = 'none';
-
-        // Atualiza a lista de projetos após a criação
-        loadProjects(); 
+        loadProjects();
     } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao criar o projeto');
+        alert('Erro ao salvar o projeto.');
+        console.error(error);
     }
 };
+
+// Carrega os projetos ao carregar a página
+loadProjects();
