@@ -78,7 +78,7 @@ function validateLoginForm(event) {
     if (user) {
         alert('Login realizado com sucesso! Bem-vindo(a) ' + user.name);
         // Aqui você pode redirecionar para a página principal
-        // window.location.href = 'home.html';
+         window.location.href = 'meu aluno 2/index.html';
     } else {
         alert('Email ou senha incorretos!');
     }

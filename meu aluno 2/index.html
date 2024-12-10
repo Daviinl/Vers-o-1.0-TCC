@@ -163,15 +163,26 @@
             transition: background-color 0.3s ease-in-out;
         }
     
-        .prev-btn:hover {
-            background-color: #FFA000;
+        .edit-btn,.delete-btn {
+            width: 70px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            background-color: #287ED4;
+            color: #fff;
         }
+
+
+        
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo-area">
-            <img src="img/Senai proj.jpg" alt="Logo">
+            <img src="img/Logo home.png" alt="Logo">
         </div>
         <ul class="sidebar-menu">
             <li class="active"> <img src="img/relogio.png" alt="">Projects</li>
@@ -235,11 +246,22 @@
                         </div>
                         <div class="form-group">
                             <label for="course">Curso:</label>
-                            <input type="text" id="course" name="course" placeholder="Digite o curso" required>
+                            <select id="course" name="course" required>
+                                <option value="" disabled selected>Selecione o curso</option>
+                                <option value="Des. Sistemas">Des. Sistemas</option>
+                                <option value="administracao">Administração</option>
+                                <option value="engenharia">Engenharia</option>
+                                <option value="design">Design</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="classGroup">Turma:</label>
-                            <input type="text" id="classGroup" name="classGroup" placeholder="Digite a turma" required>
+                            <select id="classGroup" name="classGroup" required>
+                                <option value="" disabled selected>Selecione a turma</option>
+                                <option value="8367">85367</option>
+                                <option value="8366">85366</option>
+                                <option value="8365">85365</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="component1">Componente 1:</label>
@@ -320,19 +342,27 @@
                 {
                     id: 1,
                     name: 'Projeto 1',
-                    course: 'Tecnologia da Informação',
-                    classGroup: '2024-01',
+                    course: 'Des. Sistemas',
+                    classGroup: '85367',
                     shift: 'Matutino',
-                    advisor: 'Prof. João Silva',
+                    advisor: 'Carlos Anderson',
                 },
                 {
                     id: 2,
                     name: 'Projeto 2',
-                    course: 'Engenharia de Software',
-                    classGroup: '2024-02',
+                    course: 'Des. Sistemas',
+                    classGroup: '85367',
                     shift: 'Vespertino',
-                    advisor: 'Prof. Maria Oliveira',
+                    advisor: 'Carlos Anderson',
                 },
+                {
+                    id: 3,
+                    name: 'Projeto 3',
+                    course: 'Des. Sistemas',
+                    classGroup: '85367',
+                    shift: 'Matutino',
+                    advisor: 'Clarisvete',
+                }
                 // Adicione mais projetos conforme necessário
             ];
             
@@ -341,22 +371,24 @@
 
             // Preencher a tabela com os projetos
             projects.forEach(project => {
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td>${project.name}</td>
-                    <td>${project.course}</td>
-                    <td>${project.classGroup}</td>
-                    <td>${project.shift}</td>
-                    <td>${project.advisor}</td>
-                    <td>
-                        <button class="edit-btn" onclick="editProject(${project.id})">Editar</button>
-                        <button class="delete-btn" onclick="deleteProject(${project.id})">Excluir</button>
-                    </td>
-                `;
-                
-                projectsList.appendChild(row);
-            });
+    const row = document.createElement('tr');
+    
+    row.innerHTML = `
+        <td>${project.name}</td>
+        <td>${project.course}</td>
+        <td>${project.classGroup}</td>
+        <td>${project.shift}</td>
+        <td>${project.advisor}</td>
+        <td>
+            <button class="edit-btn" onclick="window.location.href='/editar_proj_aluno_2/index.html?id=${project.id}'">Editar</button>
+            <button class="delete-btn" onclick="deleteProject(${project.id})">Excluir</button>
+        </td>
+    `;
+
+    document.querySelector('#projects-list').appendChild(row);
+});
+
+
         }
 
         // Função para avançar entre os passos
